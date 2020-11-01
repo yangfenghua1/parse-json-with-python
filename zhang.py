@@ -18,11 +18,11 @@ def writeM():
     i = 0
     for line in text_list: #　循环字典
         i = i + 1
-        sheet.write(int(i),2,line) #　将line写入到第int(line)行，第0列中
+        sheet.write(int(i),2,line) #　将line写入到第int(line)行，第2列中
     i = 0
     for line in digg_count_list: #　循环字典
         i = i + 1
-        sheet.write(int(i),1,line) #　将line写入到第int(line)行，第0列中
+        sheet.write(int(i),1,line) #　将line写入到第int(line)行，第1列中
     i = 0
     for line in cid_list: #　循环字典
         i = i + 1
