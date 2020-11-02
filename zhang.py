@@ -6,7 +6,6 @@ def readExcel(file):
 def Time2ISOString( s ):
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime( float(s) ) ) 
     
-    return '%s%s:%s%s:%s%s'%(num1,num2,num3,num4,num5,num6)
 def writeM():
     method = input("Enter method: ")
     if (method == 'url'):
