@@ -1,4 +1,4 @@
-import json,xlwt,jsonpath,urllib3,time,datetime
+import json,xlwt,jsonpath,urllib3,time,datetime,os
 def readExcel(file):
     with open(file,'r',encoding='utf8') as fr:
         data = json.load(fr) # 用json中的load方法，将json串转换成字典
@@ -10,8 +10,9 @@ def writeM():
     method = input("Enter method: ")
     if (method == 'url'):
         http = urllib3.PoolManager()
-        user_id = "98524936524"
-        req_1 = {"uid":user_id,"condition":"create_time","page":0,"size":50,"sort":[],"filterDelete":"true"}
+        user_id = "98524936524" #98524936524(四平警事) "98098916818"(平安佳木斯)
+        page = 0
+        req_1 = {"uid":user_id,"condition":"create_time","page":page,"size":10000,"sort":[],"filterDelete":"true"}
         encoded_req_1 = json.dumps(req_1).encode('utf-8')
         r_1 = http.request('POST','https://www.doudouxia.com/data-center/douyin/detail/author',
                 body=encoded_req_1,
@@ -22,15 +23,20 @@ def writeM():
                 a_1 = json.loads(response_1.decode())
 
         book = xlwt.Workbook() # 创建一个excel对象
+        sheet0 = book.add_sheet("basic data",cell_overwrite_ok=True) # 添加一个sheet页
+        title_basic_data = ["视频链接","视频标题","视频点赞数","视频评论数","视频转发数","视频创建时间"]
+        for i in range(len(title_basic_data)): # 循环列
+            sheet0.write(0,i+2,title_basic_data[i]) # 将title数组中的字段写入到0行i列中
         id_list=jsonpath.jsonpath(a_1,"$.result.content[*].id")
         create_time_list=jsonpath.jsonpath(a_1,"$.result.content[*].create_time")
         desc_list=jsonpath.jsonpath(a_1,"$.result.content[*].desc")
         digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[*].statistics.digg_count")
         comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[*].statistics.comment_count")
         share_video_list=jsonpath.jsonpath(a_1,"$.result.content[*].statistics.share_count")
-        create_video_list=jsonpath.jsonpath(a_1,"$.result.content[*].statistics.create_time")
-        print(desc_list[1])
+        share_url_list=jsonpath.jsonpath(a_1,"$.result.content[*].share_url")        
+        nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[*].author.nickname")
         array = []
+        array1 = []
         if create_time_list:
             for video_id in create_time_list:
                 if video_id in range(1546272000,1577808000):
@@ -39,13 +45,32 @@ def writeM():
                     print(video_id)
                     array.append(0)
             print(array)
+            print("count 1:",array.count(1),"count 0:",array.count(0))
+            for digg_id in digg_video_list:
+                if digg_id in range(6000,100000000):
+                    array1.append(1)
+                else:
+                    array1.append(0)
+            print(array1)
+            print(digg_video_list)
+            print("count 1:",array1.count(1),"count 0:",array1.count(0))
             j = 0
+            k = 0#basic data index
             for video_id in id_list: #　循环字典
-                if array[j] == 0:
-                    print(j,"out of date!!!!!")
+                if array[j]+array1[j] < 2:
+                    print(j,"out of date or small digg!!!!!")
                     j = j+1
                     continue
                 else:
+                    k = k+1
+                    sheet0.write(k,0,nick_name_list[j])
+                    sheet0.write(k,1,k)
+                    sheet0.write(k,2,share_url_list[j])
+                    sheet0.write(k,3,desc_list[j])
+                    sheet0.write(k,4,digg_video_list[j])
+                    sheet0.write(k,5,comment_video_list[j])
+                    sheet0.write(k,6,share_video_list[j])
+                    sheet0.write(k,7,Time2ISOString(create_time_list[j]))
                     print(j,"in range of 2019-01-01---2019-12-31")
                     print(video_id,len(id_list))
                     req_2 = {"id":video_id,"page":0,"size":100000}
@@ -62,7 +87,7 @@ def writeM():
                     else:
                         print("status != 200")
                     title = ["该评论cid","该评论点赞","评论内容"]
-                    sheet = book.add_sheet(video_id,cell_overwrite_ok=True) # 添加一个sheet页
+                    sheet = book.add_sheet(str(k),cell_overwrite_ok=True) # 添加一个sheet页
                     for i in range(len(title)): # 循环列
                         sheet.write(3,i,title[i]) # 将title数组中的字段写入到0行i列中
                     cid_list=jsonpath.jsonpath(a_2,"$.result.content[*].cid")
@@ -104,11 +129,11 @@ def writeM():
                     if share_video_list:
                         sheet.write(1,3,"视频转发数")
                         sheet.write(2,3,share_video_list[j])
-                    if create_video_list:
+                    if create_time_list:
                         sheet.write(1,4,"视频创建时间")
-                        sheet.write(2,4,Time2ISOString(create_video_list[j]))  
+                        sheet.write(2,4,Time2ISOString(create_time_list[j]))  
                     j = j+1
-        book.save('url-output-'+user_id+'-excel.xls')
+        book.save('url-output-'+nick_name_list[1]+'-'+str(page)+'-excel.xls')
         print("url request no impl")
     else:
         filename = input("Enter filename: ")
