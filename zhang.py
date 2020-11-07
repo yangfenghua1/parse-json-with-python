@@ -21,7 +21,6 @@ def writeM(user_id,digg_ref):
     method = 'url'#input("Enter method: ")
     if (method == 'url'):
         http = urllib3.PoolManager()
-        user_id = "98524936524" #98524936524(四平警事) "98098916818"(平安佳木斯)
         page = 0
         req_1 = {"uid":user_id,"condition":"create_time","page":page,"size":10000,"sort":[],"filterDelete":"true"}
         encoded_req_1 = json.dumps(req_1).encode('utf-8')
@@ -80,6 +79,7 @@ def writeM(user_id,digg_ref):
                 nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].author.nickname")
             if nick_name_list:
                 nick_name = nick_name_list[1]
+                print(nick_name,"start")
             array = []
             array1 = []
             if create_time_list:
@@ -195,7 +195,7 @@ def writeM(user_id,digg_ref):
                             sheet.write(2,4,Time2ISOString(create_time_list[j]))  
                         j = j+1
         book.save('url-output-'+nick_name+'-'+str(page)+'-excel.xls')
-        print(nick_name，"：完成")
+        print(nick_name,"end")
     else:
         filename = input("Enter filename: ")
         a = readExcel(filename)
