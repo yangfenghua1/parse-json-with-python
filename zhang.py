@@ -40,32 +40,32 @@ def writeM(user_id,digg_ref):
                 if len(response_1) > 0:
                     a_1 = json.loads(response_1.decode())
             if digg_ref == 10000:
-                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].id")
-                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].create_time")
-                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].desc")
-                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].statistics.digg_count")
-                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].statistics.comment_count")
-                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].statistics.share_count")
-                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].share_url")        
-                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 10000)].author.nickname")
+                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].id")
+                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].create_time")
+                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].desc")
+                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].statistics.digg_count")
+                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].statistics.comment_count")
+                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].statistics.share_count")
+                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].share_url")        
+                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 10000)].author.nickname")
             elif digg_ref == 8000:
-                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].id")
-                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].create_time")
-                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].desc")
-                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].statistics.digg_count")
-                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].statistics.comment_count")
-                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].statistics.share_count")
-                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].share_url")        
-                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 8000)].author.nickname")
+                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].id")
+                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].create_time")
+                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].desc")
+                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].statistics.digg_count")
+                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].statistics.comment_count")
+                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].statistics.share_count")
+                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].share_url")        
+                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 8000)].author.nickname")
             else:
-                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].id")
-                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].create_time")
-                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].desc")
-                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].statistics.digg_count")
-                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].statistics.comment_count")
-                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].statistics.share_count")
-                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].share_url")        
-                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.statistics.digg_count > 6000)].author.nickname")
+                id_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].id")
+                create_time_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].create_time")
+                desc_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].desc")
+                digg_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].statistics.digg_count")
+                comment_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].statistics.comment_count")
+                share_video_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].statistics.share_count")
+                share_url_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].share_url")        
+                nick_name_list=jsonpath.jsonpath(a_1,"$.result.content[?(@.create_time in range(1546272000,1577808000) and @.share_url and @.statistics.digg_count > 6000)].author.nickname")
             if nick_name_list:
                 nick_name = nick_name_list[1]
             array = []
@@ -213,5 +213,5 @@ def writeM(user_id,digg_ref):
 if __name__ == '__main__':
     user_id_list = ["98524936524","105013482132","81836097743","104603097611","3555212221","98098916818","89924583563","84429877784","94719433130","104379730631"]
     digg_ref = [10000,10000,10000,8000,8000,6000,6000,6000,6000,6000]
-    for i in range(3,10):
+    for i in range(10):
         writeM(user_id_list[i],digg_ref[i])
