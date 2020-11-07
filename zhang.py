@@ -9,6 +9,19 @@ def Time2ISOString( s ):
 def writeM(user_id,digg_ref):
     method = 'url'#input("Enter method: ")
     if (method == 'url'):
+        http = urllib3.PoolManager()
+        user_id = "98524936524" #98524936524(四平警事) "98098916818"(平安佳木斯)
+        page = 0
+        req_1 = {"uid":user_id,"condition":"create_time","page":page,"size":10000,"sort":[],"filterDelete":"true"}
+        encoded_req_1 = json.dumps(req_1).encode('utf-8')
+        r_1 = http.request('POST','https://www.doudouxia.com/data-center/douyin/detail/author',
+                body=encoded_req_1,
+                headers={'Content-Type':'application/json'})
+        if r_1.status == 200:
+            response_1 = r_1.data
+            if len(response_1) > 0:
+                a_1 = json.loads(response_1.decode())
+
         book = xlwt.Workbook() # 创建一个excel对象
         sheet0 = book.add_sheet("basic data",cell_overwrite_ok=True) # 添加一个sheet页
         title_basic_data = ["视频链接","视频标题","视频点赞数","视频评论数","视频转发数","视频创建时间"]
