@@ -197,7 +197,7 @@ def writeM(user_id,digg_ref):
                             sheet.write(2,4,Time2ISOString(create_time_list[j]))  
                         j = j+1
         book.save('url-output-'+nick_name+'-'+str(page)+'-excel.xls')
-        print("url request no impl")
+        print(nick_name，"：完成")
     else:
         filename = input("Enter filename: ")
         a = readExcel(filename)
