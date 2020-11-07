@@ -1,3 +1,14 @@
+#98524936524(四平警事) 
+#105013482132(盘锦网警)
+#81836097743(双鸭山公安)
+#104603097611(伊春市公安局反诈骗中心) 
+#3555212221(平安鹤岗) 
+#98098916818(平安佳木斯) 
+#89924583563(雪城公安) 
+#84429877784(鹤城公安) 
+#94719433130(大连e警视)
+#104379730631(平安哈尔滨) 
+
 import json,xlwt,jsonpath,urllib3,time,datetime,os
 def readExcel(file):
     with open(file,'r',encoding='utf8') as fr:
@@ -28,18 +39,6 @@ def writeM(user_id,digg_ref):
         for i in range(len(title_basic_data)): # 循环列
             sheet0.write(0,i+2,title_basic_data[i]) # 将title数组中的字段写入到0行i列中
         http = urllib3.PoolManager()
-        #user_id_list = ["98524936524","105013482132","81836097743","104603097611","3555212221","98098916818","89924583563","84429877784","94719433130","104379730631"]
-        #user_id = "98524936524" 
-        #98524936524(四平警事) 
-        #105013482132(盘锦网警)
-        #81836097743(双鸭山公安)
-        #104603097611(伊春市公安局反诈骗中心) 
-        #3555212221(平安鹤岗) 
-        #98098916818(平安佳木斯) 
-        #89924583563(雪城公安) 
-        #84429877784(鹤城公安) 
-        #94719433130(大连e警视)
-        #104379730631(平安哈尔滨) 
         nick_name = ""
         k = 0#basic data index
         for page in range(10):
@@ -103,7 +102,6 @@ def writeM(user_id,digg_ref):
                     else:
                         array1.append(0)
                 print(array1)
-                print(digg_video_list)
                 print("count 1:",array1.count(1),"count 0:",array1.count(0))
                 j = 0
                 video_continue = 0
